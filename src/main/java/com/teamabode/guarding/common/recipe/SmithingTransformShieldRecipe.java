@@ -1,27 +1,29 @@
 package com.teamabode.guarding.common.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.core.init.GuardingRecipeSerializers;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.Level;
 
 import java.util.stream.Stream;
 
-public class SmithingTransformShieldRecipe implements SmithingRecipe {
-    public static final ResourceLocation ID = Guarding.id("smithing_transform_shield");
-
-    private final Ingredient template;
-    private final Ingredient base;
-    private final Ingredient addition;
-    private final ItemStack result;
+public record SmithingTransformShieldRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) implements SmithingRecipe {
+    public static final Codec<SmithingTransformShieldRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Ingredient.CODEC.fieldOf("template").forGetter(SmithingTransformShieldRecipe::template),
+            Ingredient.CODEC.fieldOf("base").forGetter(SmithingTransformShieldRecipe::base),
+            Ingredient.CODEC.fieldOf("addition").forGetter(SmithingTransformShieldRecipe::addition),
+            ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(SmithingTransformShieldRecipe::result)
+    ).apply(instance, SmithingTransformShieldRecipe::new));
 
     public SmithingTransformShieldRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) {
         this.template = template;
@@ -67,11 +69,6 @@ public class SmithingTransformShieldRecipe implements SmithingRecipe {
     }
 
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
     public RecipeSerializer<?> getSerializer() {
         return GuardingRecipeSerializers.SMITHING_TRANSFORM_SHIELD;
     }
@@ -82,18 +79,13 @@ public class SmithingTransformShieldRecipe implements SmithingRecipe {
     }
 
     public static class Serializer implements RecipeSerializer<SmithingTransformShieldRecipe> {
-
         @Override
-        public SmithingTransformShieldRecipe fromJson(ResourceLocation id, JsonObject root) {
-            Ingredient template = Ingredient.fromJson(GsonHelper.getNonNull(root, "template"));
-            Ingredient base = Ingredient.fromJson(GsonHelper.getNonNull(root, "base"));
-            Ingredient addition = Ingredient.fromJson(GsonHelper.getNonNull(root, "addition"));
-            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(root, "result"));
-            return new SmithingTransformShieldRecipe(template, base, addition, result);
+        public Codec<SmithingTransformShieldRecipe> codec() {
+            return SmithingTransformShieldRecipe.CODEC;
         }
 
         @Override
-        public SmithingTransformShieldRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf packet) {
+        public SmithingTransformShieldRecipe fromNetwork(FriendlyByteBuf packet) {
             Ingredient template = Ingredient.fromNetwork(packet);
             Ingredient base = Ingredient.fromNetwork(packet);
             Ingredient addition = Ingredient.fromNetwork(packet);

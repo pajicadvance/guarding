@@ -34,7 +34,7 @@ public class NetheriteShieldRenderer implements BuiltinItemRendererRegistry.Dyna
 
         ClientLevel level = Minecraft.getInstance().level;
         if (level != null) {
-            ArmorTrim.getTrim(level.registryAccess(), stack).ifPresent(armorTrim -> {
+            ArmorTrim.getTrim(level.registryAccess(), stack, true).ifPresent(armorTrim -> {
                 model.renderTrim(poseStack, bufferSource, light, armorTrim);
             });
         }

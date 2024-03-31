@@ -2,13 +2,9 @@ package com.teamabode.guarding;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import com.teamabode.guarding.core.init.*;
-import com.teamabode.scribe.core.api.config.Config;
-import com.teamabode.scribe.core.api.config.ConfigBuilder;
+import com.teamabode.sketch.core.api.config.Config;
+import com.teamabode.sketch.core.api.config.ConfigBuilder;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.critereon.ImpossibleTrigger;
-import net.minecraft.advancements.critereon.KilledTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import org.slf4j.Logger;

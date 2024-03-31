@@ -1,6 +1,5 @@
 package com.teamabode.guarding.core.mixin.gameplay;
 
-import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.core.access.ProjectileAccessor;
 import com.teamabode.guarding.core.init.GuardingCritieriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,7 +20,6 @@ public class KilledByParriedArrowTriggerMixin {
         Entity directEntity = source.getDirectEntity();
 
         if (directEntity instanceof ProjectileAccessor projectile && projectile.getParrier() instanceof ServerPlayer player) {
-            Guarding.LOGGER.info(player.getStringUUID());
             GuardingCritieriaTriggers.KILLED_BY_PARRIED_ARROW.trigger(player, $this);
         }
     }
