@@ -7,7 +7,8 @@
     "item": "minecraft:shield"
   },
   "result": {
-    "item": "guarding:netherite_shield"
+    "id": "guarding:netherite_shield",
+    "count": 1
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

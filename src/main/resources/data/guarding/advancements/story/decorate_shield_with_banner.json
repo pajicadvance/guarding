@@ -1,8 +1,18 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:shield",
-      "nbt": "{BlockEntityTag:{Base:10,Patterns:[{Pattern:\"sc\",Color:4}]}}"
+      "id": "minecraft:shield",
+      "count": 1,
+      "components": {
+          "minecraft:base_color": "blue",
+          "minecraft:banner_patterns": [
+              {
+                  "pattern": "minecraft:stripe_center",
+                  "color": "yellow"
+              }
+          ],
+          "minecraft:hide_additional_tooltip": {}
+      }
     },
     "title": {
       "translate": "advancements.guarding.story.decorate_shield_with_banner.title"

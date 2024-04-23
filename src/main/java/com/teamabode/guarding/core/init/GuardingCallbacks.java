@@ -2,7 +2,7 @@ package com.teamabode.guarding.core.init;
 
 import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.core.access.ProjectileAccessor;
-import com.teamabode.guarding.core.api.GuardingEvents;
+import com.teamabode.sketch.core.api.event.ShieldEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -20,8 +20,8 @@ import net.minecraft.world.phys.Vec3;
 public class GuardingCallbacks {
 
     public static void init() {
-        GuardingEvents.SHIELD_BLOCKED.register(GuardingCallbacks::onShieldBlock);
-        //GuardingEvents.SHIELD_DISABLED.register(GuardingCallbacks::onShieldDisabled);
+        ShieldEvents.BLOCKED.register(GuardingCallbacks::onShieldBlock);
+        //ShieldEvents.DISABLED.register(GuardingCallbacks::onShieldDisabled);
     }
 
     // Logic for blocking

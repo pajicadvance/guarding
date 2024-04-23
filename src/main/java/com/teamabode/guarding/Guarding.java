@@ -1,19 +1,21 @@
 package com.teamabode.guarding;
 
-import com.chocohead.mm.api.ClassTinkerers;
 import com.teamabode.guarding.core.init.*;
 import com.teamabode.sketch.core.api.config.Config;
 import com.teamabode.sketch.core.api.config.ConfigBuilder;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Guarding implements ModInitializer {
     public static final String MOD_ID = "guarding";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    public static final EnchantmentCategory GUARDING_SHIELD = ClassTinkerers.getEnum(EnchantmentCategory.class, "GUARDING_SHIELD");
+
+    public static final TagKey<Item> SHIELD_ENCHANTABLE = TagKey.create(Registries.ITEM, id("enchantable/shield"));
 
     public static final Config CONFIG = new ConfigBuilder(MOD_ID)
             .addGroup("general", builder -> {

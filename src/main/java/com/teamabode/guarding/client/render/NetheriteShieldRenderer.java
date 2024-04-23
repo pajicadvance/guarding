@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -33,10 +34,8 @@ public class NetheriteShieldRenderer implements BuiltinItemRendererRegistry.Dyna
         model.renderToBuffer(poseStack, buffer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
 
         ClientLevel level = Minecraft.getInstance().level;
-        if (level != null) {
-            ArmorTrim.getTrim(level.registryAccess(), stack, true).ifPresent(armorTrim -> {
-                model.renderTrim(poseStack, bufferSource, light, armorTrim);
-            });
+        if (level != null && stack.has(DataComponents.TRIM)) {
+            model.renderTrim(poseStack, bufferSource, light, stack.get(DataComponents.TRIM));
         }
         if (stack.hasFoil()) {
             model.renderGlint(poseStack, bufferSource, light);

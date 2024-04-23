@@ -5,19 +5,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 public class RetributionEnchantment extends GuardingEnchantment {
 
     public RetributionEnchantment() {
-        super(Rarity.RARE);
-    }
-
-    public int getMinCost(int level) {
-        return level * 25;
-    }
-
-    public int getMaxCost(int level) {
-        return 50;
-    }
-
-    public int getMaxLevel() {
-        return 2;
+        super(2, 2, Enchantment.dynamicCost(10, 25), Enchantment.dynamicCost(55, 25), 4);
     }
 
     public boolean isTreasureOnly() {

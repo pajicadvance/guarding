@@ -1,21 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "plugin": "com.teamabode.guarding.core.mixin.GuardingMixinConfigPlugin",
+  "plugin": "com.teamabode.guarding.core.mixin.GuardingMixinPlugin",
   "package": "com.teamabode.guarding.core.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "api.NetheriteShieldMixin",
-    "api.ShieldBlockedMixin",
-    "api.ShieldDisabledMixin",
-    "api.ShieldEnchantabilityMixin",
-    "gameplay.BannerRefundMixin",
-    "gameplay.EnchantmentCategoryMixin",
-    "gameplay.KilledByParriedArrowTriggerMixin",
-    "gameplay.NetheriteShieldSoundMixin",
-    "gameplay.ProjectileMixin",
-    "gameplay.ShieldDelayMixin",
-    "gameplay.SmithingIconMixin"
+    "NetheriteShieldMixin",
+    "ShieldItemMixin",
+    "SmithingMenuMixin",
+    "KilledByParriedArrowTriggerMixin",
+    "NetheriteShieldSoundMixin",
+    "ProjectileMixin",
+    "ShieldDelayMixin",
+    "SmithingTemplateItemMixin"
   ],
   "client": [
   ],

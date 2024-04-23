@@ -1,4 +1,4 @@
-package com.teamabode.guarding.core.mixin.gameplay;
+package com.teamabode.guarding.core.mixin;
 
 import com.teamabode.guarding.core.access.ProjectileAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +18,7 @@ public class ProjectileMixin implements ProjectileAccessor {
     private Entity cachedParrier;
 
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    private void readParrierData(CompoundTag compound, CallbackInfo ci) {
+    private void guarding$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if (compound.hasUUID("Parrier")) {
             this.parrierUUID = compound.getUUID("Parrier");
             this.cachedParrier = null;
@@ -26,7 +26,7 @@ public class ProjectileMixin implements ProjectileAccessor {
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-    private void addParrierData(CompoundTag compound, CallbackInfo ci) {
+    private void guarding$addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if (this.parrierUUID != null) {
             compound.putUUID("Parrier", this.parrierUUID);
         }

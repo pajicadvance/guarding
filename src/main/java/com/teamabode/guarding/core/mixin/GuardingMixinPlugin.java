@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class GuardingMixinConfigPlugin implements IMixinConfigPlugin {
+public class GuardingMixinPlugin implements IMixinConfigPlugin {
 
     public boolean shouldApplyMixin(String target, String mixin) {
         // Compatibility with Fabric Shield Lib

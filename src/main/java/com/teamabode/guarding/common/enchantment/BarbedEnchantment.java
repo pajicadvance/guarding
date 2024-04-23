@@ -5,15 +5,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 public class BarbedEnchantment extends GuardingEnchantment {
 
     public BarbedEnchantment() {
-        super(Rarity.RARE);
-    }
-
-    public int getMinCost(int level) {
-        return 20;
-    }
-
-    public int getMaxCost(int level) {
-        return 50;
+        super(2, 1, Enchantment.constantCost(20), Enchantment.constantCost(50), 2);
     }
 
     protected boolean checkCompatibility(Enchantment other) {

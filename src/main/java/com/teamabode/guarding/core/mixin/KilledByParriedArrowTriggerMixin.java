@@ -1,4 +1,4 @@
-package com.teamabode.guarding.core.mixin.gameplay;
+package com.teamabode.guarding.core.mixin;
 
 import com.teamabode.guarding.core.access.ProjectileAccessor;
 import com.teamabode.guarding.core.init.GuardingCritieriaTriggers;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class KilledByParriedArrowTriggerMixin {
 
     @Inject(method = "die", at = @At("HEAD"))
-    private void die(DamageSource source, CallbackInfo ci) {
+    private void guarding$die(DamageSource source, CallbackInfo ci) {
         LivingEntity $this = LivingEntity.class.cast(this);
         Entity directEntity = source.getDirectEntity();
 

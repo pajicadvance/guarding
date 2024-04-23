@@ -1,8 +1,8 @@
 {
     "display": {
         "icon": {
-            "item": "minecraft:shield",
-            "nbt": "{Damage: 0}"
+            "id": "minecraft:shield",
+            "count": 1
         },
         "title": {
             "translate": "advancements.guarding.story.kill_mob_with_own_arrow.title"

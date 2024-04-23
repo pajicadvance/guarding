@@ -1,39 +1,37 @@
 {
-  "display": {
-    "icon": {
-      "item": "guarding:netherite_shield",
-      "nbt": "{Damage:0}"
+    "display": {
+        "icon": {
+            "id": "guarding:netherite_shield",
+            "count": 1
+        },
+        "title": {
+            "translate": "advancements.guarding.nether.obtain_netherite_shield.title"
+        },
+        "description": {
+            "translate": "advancements.guarding.nether.obtain_netherite_shield.desc"
+        },
+        "frame": "challenge"
     },
-    "title": {
-      "translate": "advancements.guarding.nether.obtain_netherite_shield.title"
+    "parent": "minecraft:nether/netherite_armor",
+    "criteria": {
+        "netherite_shield": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "guarding:netherite_shield"
+                    }
+                ]
+            }
+        }
     },
-    "description": {
-      "translate": "advancements.guarding.nether.obtain_netherite_shield.desc"
-    },
-    "frame": "challenge"
-  },
-  "parent": "minecraft:nether/netherite_armor",
-  "criteria": {
-    "netherite_shield": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "guarding:netherite_shield"
-            ]
-          }
+    "requirements": [
+        [
+            "netherite_shield"
         ]
-      }
-    }
-  },
-  "requirements": [
-    [
-      "netherite_shield"
-    ]
-  ],
-  "rewards": {
-    "experience": 100
-  },
-  "sends_telemetry_event": true
+    ],
+    "rewards": {
+        "experience": 100
+    },
+    "sends_telemetry_event": true
 }

@@ -1,20 +1,10 @@
 package com.teamabode.guarding.common.enchantment;
 
+import net.minecraft.world.item.enchantment.Enchantment;
+
 public class PummelingEnchantment extends GuardingEnchantment {
 
     public PummelingEnchantment() {
-        super(Rarity.COMMON);
-    }
-
-    public int getMinCost(int level) {
-        return level * 10;
-    }
-
-    public int getMaxCost(int level) {
-        return this.getMinCost(level) + 30;
-    }
-
-    public int getMaxLevel() {
-        return 3;
+        super(5, 3, Enchantment.dynamicCost(10, 10), Enchantment.dynamicCost(60, 10), 4);
     }
 }
