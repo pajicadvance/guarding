@@ -20,17 +20,19 @@ import net.minecraft.world.phys.Vec3;
 public class GuardingCallbacks {
 
     public static void init() {
-        ShieldEvents.BLOCKED.register(GuardingCallbacks::onShieldBlock);
-        //ShieldEvents.DISABLED.register(GuardingCallbacks::onShieldDisabled);
+        ShieldEvents.BLOCKED.register(GuardingCallbacks::onBlocked);
     }
 
     // Logic for blocking
-    private static void onShieldBlock(Player user, DamageSource source, float amount) {
+    private static void onBlocked(Player user, DamageSource source, float amount) {
         Entity sourceEntity = source.getDirectEntity();
         boolean isParry = (user.getUseItem().getUseDuration() - user.getUseItemRemainingTicks()) <= 3;
         if (sourceEntity instanceof LivingEntity attacker) blockLivingEntity(user, attacker, isParry);
         if (sourceEntity instanceof Projectile projectile) blockProjectile(user, source.getEntity(), projectile, isParry);
-        tryParryEffects(user, sourceEntity, isParry);
+
+        if (isParry) {
+            parryEffects(user, sourceEntity);
+        }
     }
 
     // Logic for blocking a living entity
@@ -82,39 +84,13 @@ public class GuardingCallbacks {
     }
 
     // Parry visual effects (Sound and particles)
-    private static void tryParryEffects(Player user, Entity sourceEntity, boolean isParry) {
-        if (!isParry) return;
-
+    private static void parryEffects(Player user, Entity sourceEntity) {
         Level level = user.level();
-        SoundEvent breakSound = user.getUseItem().is(GuardingItems.NETHERITE_SHIELD) ? GuardingSounds.ITEM_NETHERITE_SHIELD_PARRY : GuardingSounds.ITEM_SHIELD_PARRY;
+        SoundEvent breakSound = GuardingSounds.ITEM_SHIELD_PARRY;
         level.playSound(null, user.blockPosition(), breakSound, SoundSource.PLAYERS);
 
         if (level instanceof ServerLevel server && sourceEntity != null) {
             server.sendParticles(GuardingParticles.PARRY, sourceEntity.getX(), sourceEntity.getEyeY(), sourceEntity.getZ(), 1, 0.0d, 0.0d, 0.0d, 0.0d);
         }
-    }
-
-    // Handles the code for the Retribution Enchantment
-    private static void onShieldDisabled(Player user, LivingEntity attacker) {
-        /*
-        ItemStack useItem = user.getUseItem();
-        int retributionLevel = EnchantmentHelper.getItemEnchantmentLevel(GuardingEnchantments.RETRIBUTION, useItem);
-        int amplifier = Guarding.CONFIG.getGroup("retribution").getIntProperty("slowness_amplifier");
-
-        if (retributionLevel > 0) {
-            List<LivingEntity> list = attacker.level().getEntitiesOfClass(LivingEntity.class, user.getBoundingBox().inflate(3.0d, 0.0d, 3.0d), livingEntity -> isEnemy(user, livingEntity));
-
-            for (LivingEntity livingEntity : list) {
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, retributionLevel * 50, amplifier, true, true));
-            }
-        }
-        */
-    }
-
-    // The condition for retribution to apply
-    private static boolean isEnemy(Player user, LivingEntity other) {
-        if (other == user) return false;
-        if (other instanceof Player otherPlayer) return user.canHarmPlayer(otherPlayer);
-        return other.canBeSeenAsEnemy();
     }
 }

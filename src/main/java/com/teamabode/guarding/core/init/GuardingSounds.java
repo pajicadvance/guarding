@@ -14,7 +14,6 @@ public class GuardingSounds {
 
     public static final SoundEvent ITEM_NETHERITE_SHIELD_BLOCK = register("item.netherite_shield.block");
     public static final SoundEvent ITEM_NETHERITE_SHIELD_BREAK = register("item.netherite_shield.break");
-    public static final SoundEvent ITEM_NETHERITE_SHIELD_PARRY = register("item.netherite_shield.parry");
     public static final Holder<SoundEvent> ITEM_NETHERITE_SHIELD_EQUIP = registerHolder("item.netherite_shield.equip");
 
     private static SoundEvent register(String name) {

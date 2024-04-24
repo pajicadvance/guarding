@@ -23,14 +23,6 @@
     ],
     "subtitle": "subtitle.guarding.item.netherite_shield.break"
   },
-  "item.netherite_shield.parry": {
-    "sounds": [
-      "mob/zombie/metal1",
-      "mob/zombie/metal2",
-      "mob/zombie/metal3"
-    ],
-    "subtitle": "subtitle.guarding.item.netherite_shield.parry"
-  },
   "item.netherite_shield.equip": {
     "sounds": [
       "guarding:item/netherite_shield/equip1",
