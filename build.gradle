@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version
+version = project.minecraft_version +  "-" + project.mod_version
 group = project.maven_group
 
 repositories {
@@ -28,7 +28,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Scribe
+	// Sketch
 	modApi "com.github.Team-Abode:sketch:${rootProject.sketch_version}"
 }
 
