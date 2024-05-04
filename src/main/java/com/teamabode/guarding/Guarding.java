@@ -1,8 +1,7 @@
 package com.teamabode.guarding;
 
 import com.teamabode.guarding.core.init.*;
-import com.teamabode.sketch.core.api.config.Config;
-import com.teamabode.sketch.core.api.config.ConfigBuilder;
+import com.teamabode.sketch.core.api.config.ConfigManager;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -17,28 +16,6 @@ public class Guarding implements ModInitializer {
 
     public static final TagKey<Item> SHIELD_ENCHANTABLE = TagKey.create(Registries.ITEM, id("enchantable/shield"));
 
-    public static final Config CONFIG = new ConfigBuilder(MOD_ID)
-            .addGroup("general", builder -> {
-                builder.addBooleanProperty("no_shield_block_delay", true);
-                return builder;
-            })
-            .addGroup("parry", builder -> {
-                builder.addFloatProperty("exhaustion_cost", 2.0f);
-                builder.addFloatProperty("knockback_strength", 0.5f);
-                builder.addFloatProperty("projectile_launch_strength", 1.25f);
-                return builder;
-            })
-            .addGroup("barbed", builder -> {
-                builder.addFloatProperty("damage_amount", 2.0f);
-                builder.addFloatProperty("damage_chance", 0.2f);
-                return builder;
-            })
-            .addGroup("pummeling", builder -> {
-                builder.addFloatProperty("additional_knockback_strength_per_level", 0.15f);
-                return builder;
-            })
-            .build();
-
     public void onInitialize() {
         GuardingItems.init();
         GuardingEnchantments.init();
@@ -47,6 +24,7 @@ public class Guarding implements ModInitializer {
         GuardingCallbacks.init();
         GuardingCritieriaTriggers.init();
         GuardingRecipeSerializers.init();
+        ConfigManager.INSTANCE.register(GuardingConfig.INSTANCE);
     }
 
     public static ResourceLocation id(String name) {

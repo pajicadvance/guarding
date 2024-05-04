@@ -1,6 +1,7 @@
 package com.teamabode.guarding.core.init;
 
 import com.teamabode.guarding.Guarding;
+import com.teamabode.guarding.GuardingConfig;
 import com.teamabode.guarding.core.access.ProjectileAccessor;
 import com.teamabode.sketch.core.api.event.ShieldEvents;
 import net.minecraft.server.level.ServerLevel;
@@ -38,7 +39,7 @@ public class GuardingCallbacks {
     // Logic for blocking a living entity
     private static void blockLivingEntity(Player user, LivingEntity attacker, boolean isParry) {
         if (isParry) {
-            float exhaustion = Guarding.CONFIG.getGroup("parry").getFloatProperty("exhaustion_cost");
+            float exhaustion = GuardingConfig.INSTANCE.exhaustionCost.get();
             float strength = getKnockbackStrength(user.getUseItem());
 
             user.causeFoodExhaustion(exhaustion);
@@ -51,9 +52,9 @@ public class GuardingCallbacks {
     // Logic for blocking a projectile
     private static void blockProjectile(Player user, Entity damageCauser, Projectile projectile, boolean isParry) {
         if (!isParry || damageCauser == null) return;
-        float projectileLaunchStrength = Guarding.CONFIG.getGroup("parry").getFloatProperty("projectile_launch_strength");
+        float projectileReflectStrength = GuardingConfig.INSTANCE.projectileReflectStrength.get();
         if (projectile instanceof ProjectileAccessor accessor) accessor.setParrier(user);
-        Vec3 motion = new Vec3(user.getX() - damageCauser.getX(), 0.0f, user.getZ() - damageCauser.getZ()).scale(projectileLaunchStrength);
+        Vec3 motion = new Vec3(user.getX() - damageCauser.getX(), 0.0f, user.getZ() - damageCauser.getZ()).scale(projectileReflectStrength);
         projectile.setDeltaMovement(motion.x(), -1.5f, motion.z());
         projectile.hurtMarked = true;
     }
@@ -61,8 +62,8 @@ public class GuardingCallbacks {
     // Handles all code for the barbed enchantment
     private static void handleBarbed(Player user, LivingEntity attacker, boolean isParry) {
         RandomSource random = user.getRandom();
-        float damage = Guarding.CONFIG.getGroup("barbed").getFloatProperty("damage_amount");
-        float chance = Guarding.CONFIG.getGroup("barbed").getFloatProperty("damage_chance");
+        float damage = GuardingConfig.INSTANCE.damageAmount.get();
+        float chance = GuardingConfig.INSTANCE.damageChance.get();
         int barbedLevel = EnchantmentHelper.getItemEnchantmentLevel(GuardingEnchantments.BARBED, user.getUseItem());
         if (barbedLevel <= 0) return;
         damage += isParry ? 1.0f : 0.0f; // Parrying will cause barbed to increase it's power.
@@ -75,8 +76,8 @@ public class GuardingCallbacks {
 
     // Determines the knockback strength on parry
     private static float getKnockbackStrength(ItemStack stack) {
-        float baseStrength = Guarding.CONFIG.getGroup("parry").getFloatProperty("knockback_strength");
-        float additionalStrength = Guarding.CONFIG.getGroup("pummeling").getFloatProperty("additional_knockback_strength_per_level");
+        float baseStrength = GuardingConfig.INSTANCE.knockbackStrength.get();
+        float additionalStrength = GuardingConfig.INSTANCE.additionalKnockbackStrengthPerLevel.get();
         int pummelingLevel = EnchantmentHelper.getItemEnchantmentLevel(GuardingEnchantments.PUMMELING, stack);
         float pummelStrength = pummelingLevel > 0 ? pummelingLevel * additionalStrength : 0.0f;
 
