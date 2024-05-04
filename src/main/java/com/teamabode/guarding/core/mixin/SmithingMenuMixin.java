@@ -40,6 +40,8 @@ public abstract class SmithingMenuMixin extends ItemCombinerMenu {
         if (baseStack.has(DataComponents.BANNER_PATTERNS)) {
             bannerStack.set(DataComponents.BANNER_PATTERNS, baseStack.get(DataComponents.BANNER_PATTERNS));
         }
-        player.addItem(bannerStack);
+        if (!player.addItem(bannerStack)) {
+            player.spawnAtLocation(bannerStack);
+        }
     }
 }
