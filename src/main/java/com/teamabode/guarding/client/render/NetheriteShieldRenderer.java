@@ -23,7 +23,7 @@ public class NetheriteShieldRenderer implements BuiltinItemRendererRegistry.Dyna
     private NetheriteShieldModel model;
 
     public ResourceLocation getFabricId() {
-        return new ResourceLocation(Guarding.MOD_ID, "netherite_shield_renderer");
+        return Guarding.id("netherite_shield_renderer");
     }
 
     public void render(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
@@ -31,7 +31,7 @@ public class NetheriteShieldRenderer implements BuiltinItemRendererRegistry.Dyna
         poseStack.scale(1.0f, -1.0f, -1.0f);
 
         VertexConsumer buffer = bufferSource.getBuffer(model.renderType(NetheriteShieldModel.TEXTURE));
-        model.renderToBuffer(poseStack, buffer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+        model.renderToBuffer(poseStack, buffer, light, overlay);
 
         ClientLevel level = Minecraft.getInstance().level;
         if (level != null && stack.has(DataComponents.TRIM)) {

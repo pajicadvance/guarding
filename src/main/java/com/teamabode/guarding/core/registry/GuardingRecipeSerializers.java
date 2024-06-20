@@ -1,4 +1,4 @@
-package com.teamabode.guarding.core.init;
+package com.teamabode.guarding.core.registry;
 
 import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.common.recipe.SmithingTransformShieldRecipe;

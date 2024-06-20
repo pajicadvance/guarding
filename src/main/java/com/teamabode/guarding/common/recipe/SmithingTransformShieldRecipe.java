@@ -1,23 +1,17 @@
 package com.teamabode.guarding.common.recipe;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamabode.guarding.Guarding;
-import com.teamabode.guarding.core.init.GuardingRecipeSerializers;
+import com.teamabode.guarding.core.registry.GuardingRecipeSerializers;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmithingRecipe;
+import net.minecraft.world.item.crafting.SmithingRecipeInput;
 import net.minecraft.world.level.Level;
 
 import java.util.stream.Stream;
@@ -32,30 +26,23 @@ public record SmithingTransformShieldRecipe(Ingredient template, Ingredient base
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SmithingTransformShieldRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
-    public SmithingTransformShieldRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) {
-        this.template = template;
-        this.base = base;
-        this.addition = addition;
-        this.result = result;
+    @Override
+    public boolean matches(SmithingRecipeInput input, Level level) {
+        return this.template.test(input.template()) && this.base.test(input.base()) && this.addition.test(input.addition());
     }
 
     @Override
-    public boolean matches(Container container, Level level) {
-        return this.template.test(container.getItem(0)) && this.base.test(container.getItem(1)) && this.addition.test(container.getItem(2));
-    }
+    public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider provider) {
+        ItemStack stack = input.base().transmuteCopy(this.result.getItem(), this.result.getCount());
 
-    @Override
-    public ItemStack assemble(Container container, HolderLookup.Provider provider) {
-        ItemStack itemStack = container.getItem(1).transmuteCopy(this.result.getItem(), this.result.getCount());
-
-        if (itemStack.has(DataComponents.BASE_COLOR)) {
-            itemStack.remove(DataComponents.BASE_COLOR);
+        if (stack.has(DataComponents.BASE_COLOR)) {
+            stack.remove(DataComponents.BASE_COLOR);
         }
-        if (itemStack.has(DataComponents.BANNER_PATTERNS)) {
-            itemStack.remove(DataComponents.BANNER_PATTERNS);
+        if (stack.has(DataComponents.BANNER_PATTERNS)) {
+            stack.remove(DataComponents.BANNER_PATTERNS);
         }
-        itemStack.applyComponents(this.result.getComponentsPatch());
-        return itemStack;
+        stack.applyComponents(this.result.getComponentsPatch());
+        return stack;
     }
 
     @Override

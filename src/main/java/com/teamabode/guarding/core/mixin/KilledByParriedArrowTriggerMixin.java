@@ -1,7 +1,7 @@
 package com.teamabode.guarding.core.mixin;
 
 import com.teamabode.guarding.core.access.ProjectileAccessor;
-import com.teamabode.guarding.core.init.GuardingCritieriaTriggers;
+import com.teamabode.guarding.core.registry.GuardingCritieriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

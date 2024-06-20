@@ -1,4 +1,4 @@
-package com.teamabode.guarding.core.init;
+package com.teamabode.guarding.core.registry;
 
 import com.teamabode.guarding.Guarding;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -12,7 +12,7 @@ public class GuardingParticles {
     public static final SimpleParticleType PARRY = register("parry");
 
     private static SimpleParticleType register(String name) {
-        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, new ResourceLocation(Guarding.MOD_ID, name), FabricParticleTypes.simple(true));
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Guarding.id(name), FabricParticleTypes.simple(true));
     }
 
     public static void init() {

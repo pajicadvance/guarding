@@ -17,8 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.armortrim.ArmorTrim;
 
 public class NetheriteShieldModel extends ShieldModel {
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(Guarding.MOD_ID, "netherite_shield"), "main");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Guarding.MOD_ID, "textures/entity/netherite_shield.png");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(Guarding.id("netherite_shield"), "main");
+    public static final ResourceLocation TEXTURE = Guarding.id("textures/entity/netherite_shield.png");
 
     private final TextureAtlas atlas;
 
@@ -31,11 +31,11 @@ public class NetheriteShieldModel extends ShieldModel {
         TextureAtlasSprite sprite = atlas.getSprite(trimTexture(trim));
 
         VertexConsumer vertex = sprite.wrap(bufferSource.getBuffer(RenderType.entityCutout(Sheets.ARMOR_TRIMS_SHEET)));
-        this.renderToBuffer(poseStack, vertex, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
+        this.renderToBuffer(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
     }
 
     public void renderGlint(PoseStack poseStack, MultiBufferSource bufferSource, int light) {
-        this.renderToBuffer(poseStack, ItemRenderer.getFoilBuffer(bufferSource, RenderType.armorGlint(), false, true), light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
+        this.renderToBuffer(poseStack, ItemRenderer.getFoilBuffer(bufferSource, RenderType.armorEntityGlint(), false, true), light, OverlayTexture.NO_OVERLAY);
     }
 
     private static ResourceLocation trimTexture(ArmorTrim trim) {

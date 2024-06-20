@@ -5,6 +5,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
+/**
+ * This mixin removes the 5 tick delay that exists on Shields
+ */
 @Mixin(LivingEntity.class)
 public class ShieldDelayMixin {
 

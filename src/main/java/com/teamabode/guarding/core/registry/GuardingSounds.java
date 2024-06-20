@@ -1,11 +1,9 @@
-package com.teamabode.guarding.core.init;
+package com.teamabode.guarding.core.registry;
 
 import com.teamabode.guarding.Guarding;
-import com.teamabode.sketch.Sketch;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
 public class GuardingSounds {

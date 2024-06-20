@@ -11,10 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This mixin is used to add UI icons for Shields in the Smithing Table menu
+ */
 @Mixin(SmithingTemplateItem.class)
 public class SmithingTemplateItemMixin {
     @Unique
-    private static final ResourceLocation EMPTY_SLOT_SHIELD = new ResourceLocation("item/empty_armor_slot_shield");
+    private static final ResourceLocation EMPTY_SLOT_SHIELD = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_shield");
 
     @Inject(method = "createTrimmableArmorIconList", at = @At("RETURN"), cancellable = true)
     private static void guarding$createTrimmableArmorIconList(CallbackInfoReturnable<List<ResourceLocation>> cir) {

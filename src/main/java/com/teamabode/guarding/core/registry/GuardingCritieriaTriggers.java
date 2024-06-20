@@ -1,8 +1,7 @@
-package com.teamabode.guarding.core.init;
+package com.teamabode.guarding.core.registry;
 
 import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.common.critieria.KilledByParriedArrowTrigger;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

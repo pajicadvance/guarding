@@ -1,7 +1,8 @@
 package com.teamabode.guarding.core.mixin;
 
-import com.teamabode.guarding.core.init.GuardingItems;
-import com.teamabode.guarding.core.init.GuardingSounds;
+import com.teamabode.guarding.core.registry.GuardingItems;
+import com.teamabode.guarding.core.registry.GuardingSounds;
+import com.teamabode.guarding.core.util.ShieldUtils;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -10,6 +11,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -29,6 +32,11 @@ public abstract class NetheriteShieldMixin extends LivingEntity {
     }
 
     @Shadow public abstract void awardStat(Stat<?> stat);
+
+    @Override
+    public ProjectileDeflection deflection(Projectile projectile) {
+        return ShieldUtils.PARRY;
+    }
 
     @Inject(method = "hurtCurrentlyUsedShield", at = @At("HEAD"), cancellable = true)
     private void guarding$hurtCurrentlyUsedShield(float damageAmount, CallbackInfo ci) {

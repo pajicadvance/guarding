@@ -1,7 +1,7 @@
 package com.teamabode.guarding.core.mixin;
 
-import com.teamabode.guarding.core.init.GuardingItems;
-import com.teamabode.guarding.core.init.GuardingSounds;
+import com.teamabode.guarding.core.registry.GuardingItems;
+import com.teamabode.guarding.core.registry.GuardingSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;

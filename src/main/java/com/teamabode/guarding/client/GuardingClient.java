@@ -4,8 +4,8 @@ import com.teamabode.guarding.Guarding;
 import com.teamabode.guarding.client.model.NetheriteShieldModel;
 import com.teamabode.guarding.client.particle.ParryParticle;
 import com.teamabode.guarding.client.render.NetheriteShieldRenderer;
-import com.teamabode.guarding.core.init.GuardingItems;
-import com.teamabode.guarding.core.init.GuardingParticles;
+import com.teamabode.guarding.core.registry.GuardingItems;
+import com.teamabode.guarding.core.registry.GuardingParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -29,7 +29,7 @@ public class GuardingClient implements ClientModInitializer {
         NetheriteShieldRenderer renderer = new NetheriteShieldRenderer();
         BuiltinItemRendererRegistry.INSTANCE.register(GuardingItems.NETHERITE_SHIELD, renderer);
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(renderer);
-        ItemProperties.register(GuardingItems.NETHERITE_SHIELD, new ResourceLocation(Guarding.MOD_ID,"blocking"), GuardingClient::blockingPredicate);
+        ItemProperties.register(GuardingItems.NETHERITE_SHIELD, Guarding.id("blocking"), GuardingClient::blockingPredicate);
     }
 
     private static float blockingPredicate(ItemStack stack, ClientLevel level, LivingEntity user, int i) {
