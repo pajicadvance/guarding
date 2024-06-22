@@ -15,10 +15,10 @@
       }
     },
     "title": {
-      "translate": "advancements.guarding.story.decorate_shield_with_banner.title"
+      "translate": "advancements.guarding.story.symbolic_shield"
     },
     "description": {
-      "translate": "advancements.guarding.story.decorate_shield_with_banner.desc"
+      "translate": "advancements.guarding.story.symbolic_shield.desc"
     }
   },
   "parent": "minecraft:story/deflect_arrow",

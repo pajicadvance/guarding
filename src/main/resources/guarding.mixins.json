@@ -1,22 +1,21 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "plugin": "com.teamabode.guarding.core.mixin.GuardingMixinPlugin",
-  "package": "com.teamabode.guarding.core.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "NetheriteShieldMixin",
-    "ShieldItemMixin",
-    "SmithingMenuMixin",
-    "KilledByParriedArrowTriggerMixin",
-    "NetheriteShieldSoundMixin",
-    "ProjectileMixin",
-    "ShieldDelayMixin",
-    "SmithingTemplateItemMixin"
-  ],
-  "client": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "minVersion": "0.8",
+    "plugin": "com.teamabode.guarding.core.mixin.GuardingMixinPlugin",
+    "package": "com.teamabode.guarding.core.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "KilledByParriedArrowTriggerMixin",
+        "NetheriteShieldMixin",
+        "NetheriteShieldSoundMixin",
+        "ProjectileMixin",
+        "ShieldDelayMixin",
+        "ShieldItemMixin",
+        "SmithingMenuMixin",
+        "SmithingTemplateItemMixin"
+    ],
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
   }
 }

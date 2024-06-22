@@ -5,10 +5,10 @@
             "count": 1
         },
         "title": {
-            "translate": "advancements.guarding.nether.obtain_netherite_shield.title"
+            "translate": "advancements.guarding.nether.on_guard"
         },
         "description": {
-            "translate": "advancements.guarding.nether.obtain_netherite_shield.desc"
+            "translate": "advancements.guarding.nether.on_guard.desc"
         },
         "frame": "challenge"
     },

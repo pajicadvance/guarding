@@ -1,12 +1,20 @@
 {
   "enchantment.guarding.barbed": "Колючки",
-  "enchantment.guarding.barbed.description": "У разі успішного парирування щит завдасть шкоди нападнику.",
+  "enchantment.guarding.barbed.desc": "У разі успішного парирування щит завдасть шкоди нападнику.",
   "enchantment.guarding.pummeling": "Розбивання",
-  "enchantment.guarding.pummeling.description": "При успішному парируванні щит відкидає нападника назад.",
+  "enchantment.guarding.pummeling.desc": "При успішному парируванні щит відкидає нападника назад.",
   "item.guarding.netherite_shield": "Незеритовий щит",
   "subtitle.guarding.item.shield.parry": "Парирування щитом",
   "subtitle.guarding.item.netherite_shield.block": "Блокування щитом",
   "subtitle.guarding.item.netherite_shield.break": "Зломався шит",
   "subtitle.guarding.item.netherite_shield.parry": "Парирування щитом",
-  "subtitle.guarding.item.netherite_shield.equip": "Остащення щита"
+  "subtitle.guarding.item.netherite_shield.equip": "Остащення щита",
+  "advancements.guarding.nether.on_guard": "On Guard!",
+  "advancements.guarding.nether.on_guard.desc": "Use a Netherite Ingot to upgrade a Shield.",
+  "advancements.guarding.story.parry_this_you_casual": "Parry This, You Casual!",
+  "advancements.guarding.story.parry_this_you_casual.desc": "Kill an enemy by parrying their own Arrow",
+  "advancements.guarding.story.symbolic_shield": "Symbolic Shield",
+  "advancements.guarding.story.symbolic_shield.desc": "Decorate a Shield with a Banner",
+  "enchantment.guarding.barbed.desc": "Causes damage to enemies attacking you while blocking.",
+  "enchantment.guarding.pummeling.desc": "Increases the knockback strength of a parry."
 }
