@@ -33,8 +33,7 @@ public class NetheriteShieldRenderer implements BuiltinItemRendererRegistry.Dyna
         VertexConsumer buffer = bufferSource.getBuffer(model.renderType(NetheriteShieldModel.TEXTURE));
         model.renderToBuffer(poseStack, buffer, light, overlay);
 
-        ClientLevel level = Minecraft.getInstance().level;
-        if (level != null && stack.has(DataComponents.TRIM)) {
+        if (stack.has(DataComponents.TRIM)) {
             model.renderTrim(poseStack, bufferSource, light, stack.get(DataComponents.TRIM));
         }
         if (stack.hasFoil()) {
