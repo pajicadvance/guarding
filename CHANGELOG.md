@@ -2,6 +2,7 @@
 * Netherite Shield enchantability has been reduced. `20 -> 15`
 * Barbed durability damage has been reduced. `2 -> 1`
 * Barbed success chance has been increased. `20% -> 33%`
+* Barbed damage can now be inflicted from ranged attacks.
 
 ### Config Changes
 * The enchantability of the Shield and Netherite Shield have been made configurable.

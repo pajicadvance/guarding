@@ -5,7 +5,6 @@ import com.teamabode.guarding.core.access.ProjectileAccessor;
 import com.teamabode.guarding.core.registry.GuardingParticles;
 import com.teamabode.guarding.core.registry.GuardingSounds;
 import com.teamabode.guarding.core.tag.GuardingDamageTypeTags;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -47,7 +46,7 @@ public class ShieldUtils {
     public static void deflectProjectile(Player player, Projectile projectile) {
         ((ProjectileAccessor) projectile).setParrier(player);
 
-        projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-0.5f));
+        projectile.setDeltaMovement(projectile.getDeltaMovement().scale(5.0d));
         float reverseRot = 170.0F + projectile.getRandom().nextFloat() * 20.0F;
         projectile.setYRot(projectile.getYRot() + reverseRot);
         projectile.hasImpulse = true;
@@ -64,9 +63,5 @@ public class ShieldUtils {
 
     public static boolean canPerformParry(Player player, DamageSource source) {
         return player.getTicksUsingItem() <= 3 && !source.is(GuardingDamageTypeTags.NO_PARRY);
-    }
-
-    public static boolean canDeflectProjectile(Player player) {
-        return player.getUseItem().is(ConventionalItemTags.SHIELD_TOOLS) && player.getTicksUsingItem() <= 3;
     }
 }
