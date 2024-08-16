@@ -13,7 +13,7 @@
         "hidden": true,
         "frame": "challenge"
     },
-    "parent": "guarding:story/decorate_shield_with_banner",
+    "parent": "guarding:story/symbolic_shield",
     "criteria": {
         "killed_by_parried_arrow": {
             "trigger": "guarding:killed_by_parried_arrow",
