@@ -93,7 +93,7 @@ public class GuardingAdvancementProvider extends FabricAdvancementProvider {
                 AdvancementType.TASK,
                 true, true, false
         );
-        advancement.addCriterion("decorate_shield", RecipeCraftedTrigger.TriggerInstance.crafterCraftedItem(ResourceLocation.withDefaultNamespace("shield_decoration")));
+        advancement.addCriterion("decorate_shield", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceLocation.withDefaultNamespace("shield_decoration")));
         advancement.parent(new AdvancementHolder(ResourceLocation.withDefaultNamespace("story/deflect_arrow"), null));
         advancement.requirements(AdvancementRequirements.Strategy.AND);
         advancement.save(exporter, SYMBOLIC_SHIELD.toString());
