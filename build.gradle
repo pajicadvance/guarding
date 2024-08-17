@@ -32,6 +32,10 @@ base {
 	archivesName = project.archives_base_name
 }
 
+fabricApi {
+	configureDataGeneration()
+}
+
 processResources {
 	inputs.property "version", project.version
 

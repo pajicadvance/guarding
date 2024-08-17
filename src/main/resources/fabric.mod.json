@@ -21,6 +21,9 @@
     ],
     "client": [
       "com.teamabode.guarding.client.GuardingClient"
+    ],
+    "fabric-datagen": [
+      "com.teamabode.guarding.datagen.GuardingDataGenerator"
     ]
   },
   "accessWidener": "guarding.accesswidener",

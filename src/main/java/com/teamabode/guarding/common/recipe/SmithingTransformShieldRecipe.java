@@ -3,17 +3,27 @@ package com.teamabode.guarding.common.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabode.guarding.core.registry.GuardingRecipeSerializers;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SmithingRecipe;
-import net.minecraft.world.item.crafting.SmithingRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public record SmithingTransformShieldRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) implements SmithingRecipe {
@@ -99,6 +109,46 @@ public record SmithingTransformShieldRecipe(Ingredient template, Ingredient base
             Ingredient.CONTENTS_STREAM_CODEC.encode(packet, recipe.base);
             Ingredient.CONTENTS_STREAM_CODEC.encode(packet, recipe.addition);
             ItemStack.STREAM_CODEC.encode(packet, recipe.result);
+        }
+    }
+
+    public static class Builder {
+        private final Ingredient template;
+        private final Ingredient base;
+        private final Ingredient addition;
+        private final RecipeCategory category;
+        private final Item result;
+        private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+
+        public Builder(Ingredient template, Ingredient base, Ingredient addition, RecipeCategory category, Item result) {
+            this.template = template;
+            this.base = base;
+            this.addition = addition;
+            this.category = category;
+            this.result = result;
+        }
+
+        public Builder unlocks(String string, Criterion<?> criterion) {
+            this.criteria.put(string, criterion);
+            return this;
+        }
+
+        public void save(RecipeOutput exporter, ResourceLocation resourceLocation) {
+            this.ensureValid(resourceLocation);
+            Advancement.Builder advancement = exporter.advancement()
+                    .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation))
+                    .rewards(AdvancementRewards.Builder.recipe(resourceLocation))
+                    .requirements(AdvancementRequirements.Strategy.OR);
+            this.criteria.forEach(advancement::addCriterion);
+
+            SmithingTransformShieldRecipe recipe = new SmithingTransformShieldRecipe(this.template, this.base, this.addition, new ItemStack(this.result));
+            exporter.accept(resourceLocation, recipe, advancement.build(resourceLocation.withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        }
+
+        private void ensureValid(ResourceLocation resourceLocation) {
+            if (this.criteria.isEmpty()) {
+                throw new IllegalStateException("No way of obtaining recipe " + resourceLocation);
+            }
         }
     }
 }
