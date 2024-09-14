@@ -13,6 +13,9 @@
 
     "item.guarding.netherite_shield": "Netherite Shield",
 
+    "stat.guarding.attacks_blocked_by_shield": "Attacks Blocked by Shield",
+    "stat.guarding.attacks_parried_by_shield": "Attacks Parried by Shield",
+
     "subtitle.guarding.item.shield.parry": "Shield parries",
     "subtitle.guarding.item.netherite_shield.block": "Shield blocks",
     "subtitle.guarding.item.netherite_shield.break": "Shield breaks",

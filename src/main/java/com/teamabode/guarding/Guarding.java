@@ -20,6 +20,8 @@ public class Guarding implements ModInitializer {
         GuardingParticles.init();
         GuardingCritieriaTriggers.init();
         GuardingRecipeSerializers.init();
+        GuardingStats.init();
+
 
         ShieldEvents.BLOCKED.register(ShieldUtils::onBlocked);
         ConfigManager.INSTANCE.register(GuardingConfig.INSTANCE);

@@ -4,8 +4,10 @@ import com.teamabode.guarding.GuardingConfig;
 import com.teamabode.guarding.core.access.ProjectileAccessor;
 import com.teamabode.guarding.core.registry.GuardingParticles;
 import com.teamabode.guarding.core.registry.GuardingSounds;
+import com.teamabode.guarding.core.registry.GuardingStats;
 import com.teamabode.guarding.core.tag.GuardingDamageTypeTags;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +23,7 @@ public class ShieldUtils {
         if (performedParry) {
             parry(server, user, source);
         }
+        user.awardStat(GuardingStats.ATTACKS_BLOCKED_BY_SHIELD, 1);
         EnchantmentUtils.runBlockedEffects(server, user, source, performedParry);
     }
 
@@ -35,11 +38,15 @@ public class ShieldUtils {
         }
         player.causeFoodExhaustion(GuardingConfig.INSTANCE.exhaustionCost.get());
         server.playSound(null, player.blockPosition(), GuardingSounds.ITEM_SHIELD_PARRY, SoundSource.PLAYERS);
+        player.awardStat(GuardingStats.ATTACKS_PARRIED_BY_SHIELD, 1);
+
         EnchantmentUtils.runParriedEffects(server, player, source);
     }
 
     public static void knockbackAttacker(Player player, LivingEntity attacker) {
         float knockbackStrength = getKnockbackStrength(player);
+
+        attacker.hurtMarked = true;
         attacker.knockback(knockbackStrength, player.getX() - attacker.getX(), player.getZ() - attacker.getZ());
     }
 

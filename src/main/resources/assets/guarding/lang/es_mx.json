@@ -10,6 +10,10 @@
     "enchantment.guarding.pummeling": "Apalear",
     "enchantment.guarding.pummeling.desc": "Aumenta la fuerza de empuje de un bloqueo perfecto.",
     "item.guarding.netherite_shield": "Escudo de netherita",
+
+    "stat.guarding.attacks_blocked_by_shield": "Ataques bloqueados con escudo",
+    "stat.guarding.attacks_parried_by_shield": "Ataques bloqueados perfectamente con escudo",
+
     "subtitle.guarding.item.netherite_shield.block": "Bloqueo con escudo",
     "subtitle.guarding.item.netherite_shield.break": "Ítem destruido",
     "subtitle.guarding.item.netherite_shield.equip": "Armadura equipada",

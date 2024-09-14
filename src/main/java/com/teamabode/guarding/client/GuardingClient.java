@@ -27,13 +27,12 @@ public class GuardingClient implements ClientModInitializer {
 
     private static void netheriteShield() {
         NetheriteShieldRenderer renderer = new NetheriteShieldRenderer();
-        BuiltinItemRendererRegistry.INSTANCE.register(GuardingItems.NETHERITE_SHIELD, renderer);
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(renderer);
+        BuiltinItemRendererRegistry.INSTANCE.register(GuardingItems.NETHERITE_SHIELD, renderer);
         ItemProperties.register(GuardingItems.NETHERITE_SHIELD, Guarding.id("blocking"), GuardingClient::blockingPredicate);
     }
 
     private static float blockingPredicate(ItemStack stack, ClientLevel level, LivingEntity user, int i) {
         return user != null && user.getUseItem() == stack ? 1.0f : 0.0f;
     }
-
 }
